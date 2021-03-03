@@ -58,14 +58,21 @@ main()
     name is used only once. If no more variables left, just
     hit return key */
     /****** comment 367 *************/
-    strcpy(varlt[1], "DO");
-    strcpy(varlt[2], "FT");
-    strcpy(varlt[3], "FM");
-    strcpy(varlt[4], "IN");
-    strcpy(varlt[5], "ST");
+    strcpy(varlt[1], "CA");
+    strcpy(varlt[2], "TR");
+    strcpy(varlt[3], "CT");
+    strcpy(varlt[4], "RT");
+    strcpy(varlt[5], "SU");
+    strcpy(varlt[6], "NE");
+    strcpy(varlt[7], "CL");
+    strcpy(varlt[8], "PE");
+    strcpy(varlt[9], "SC");
+    strcpy(varlt[10], "IT");
+    strcpy(varlt[11], "RT");
+    strcpy(varlt[12], "TT");
 
     printf("*** VARIABLE LIST ***\n");
-    for (i=1;i < 11; i++)
+    for (i=1;i < 12; i++)
         printf("ENTER VARIABLE   %d   %s\n", i, varlt[i]);
     printf("HIT RETURN TO CONTINUE");
     getchar();
