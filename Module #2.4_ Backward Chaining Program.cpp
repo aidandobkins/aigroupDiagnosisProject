@@ -73,16 +73,17 @@ main()
         conclt[5] = "BC"; //bladder cancer 
         conclt[6] = "GC"; //gastric cancer 
         printf("*** CONCLUSION LIST ***\n"); 
-        for (i=1; i<11; i++) printf("CONCLUSION %d %s\n", i,conclt[i]); 
+        for (i=1; i<11; i++) 
+           cout << "CONCLUSION %d %s\n", i, conclt[i]; 
 
-        printf("HIT RETURN TO CONTINUE"); 
+        cout << "HIT RETURN TO CONTINUE"; 
         
         /* enter variables which are in the if part, 1 at a time in the 
         exact 
         order that they occur, up to 3 variables per if statement.  do not 
         duplicate any variable names.  any name is used only once.  if no 
         more variables left just hit return key. */ 
-        printf("*** VARIABLE LIST *\n"); 
+        cout << "*** VARIABLE LIST *\n"; 
         /**** comment 367 *****/ 
         varlt[1] = "FE"; //fever
         varlt[2] = "WL"; //weight loss
@@ -94,7 +95,7 @@ main()
         varlt[8] = "NL"; //neck lumps
         varlt[9] = "TS"; //trouble swallowing
         varlt[10] = "LA"; //loss of appetite
-        varlt[11] = "NU"; //need to urinate
+        varlt[11] = "CU"; // can't urinate
         varlt[12]= "UB"; //urinating burns
         varlt[13] = "VO"; //vomiting and stomach pain
         varlt[14] = "BL"; //bloated
@@ -103,29 +104,35 @@ main()
         varlt[17] = "HO"; //hoarseness
         varlt[18] = "VC"; //voice change
         varlt[19] = "NT"; //pain to neck and throat
+        varlt[19] = "PC"; //possible cancer
         for(i=1; i<11; i++) printf("VARIABLE %d %s\n", i, varlt[i]); 
-        printf("HIT RETURN KEY TO CONTINUE"); 
+        cout << "HIT RETURN KEY TO CONTINUE"; 
         cin >> buff;
         /* enter variables as they appear in the if clauses.  a maximum 
         of 3 
         variables per if statement.  if no more variables hit return 
         key. */ 
-        printf("*** CLAUSE VARIABLE LIST ***\n"); 
+        cout << "*** CLAUSE VARIABLE LIST ***\n"; 
         /***** comment 407 through 409 ***/ 
         //strcpy(clvarlt[1], "DE"); 
         clvart[1] = "FE";
          
         for(i=1; i<9; i++) 
         { 
-                printf("** CLAUSE %d\n", i); 
+                cout << "** CLAUSE %d\n", i; 
                 for(j=1; j<5; j++) 
                 { k = 4 * (i-1) + j; 
-                  printf("VARIABLE %d  %s\n", j, clvarlt[k]); } 
+                  cout << "VARIABLE %d  %s\n", j, clvarlt[k]); 
+                } 
                 if (i==4) 
-                { printf("HIT RETURN KEY TO CONTINUE"); cin >> buff; } 
+                { 
+                   cout << "HIT RETURN KEY TO CONTINUE"; 
+                   cin >> buff; 
+                } 
         } 
         /****** inference section *****/ 
-        printf("** ENTER CONCLUSION ? "); cin >> varble; 
+        cout << "** ENTER CONCLUSION ? "; 
+        cin >> varble; 
         /* get conclusion statement number (sn) from the conclusion list 
            (conclt) */ 
         /* first statement starts search */ 
@@ -168,32 +175,133 @@ b545: i= (statsk[sp] -1) *4 + clausk[sp];
                           switch (sn) { 
                                   /* if part of statement 1 */ 
                                   /****** comment 1500 ****/ 
-                          case 1: if(strcmp(de, "NO") == 0) s = 1; 
+                          case 1: if(strcmp(FE, "NO") == 0) s = 1; 
                                   break; 
                                   /* if part of statement 2 */ 
                                   /***** comment 1510 ******/ 
-                          case 2: if(strcmp(de, "YES") == 0) s = 1; 
+                          case 2: if(strcmp(FE, "YES") == 0) s = 1; 
                                   break; 
                                   /* if part of statement 3 */ 
-                          case 3: if((strcmp(de, "YES") == 0) && 
-                                     (strcmp(di, "YES") == 0)) s =1; 
+                          case 3: if(strcmp(PC, "YES") == 0) s = 1;
                                   break; 
                                   /* if part of statement 4 */ 
                                   /******** comment 1560 ******/ 
-                          case 4: if((strcmp(qu, "YES") == 0) && 
-                                     (gr<3.5) && (ex >= 2)) s = 1; 
+                          case 4: if(strcmp(WL, "NO") == 0) s = 1;
                                   break; 
                                   /******** comment 1570 ********/ 
                                   /* if part of statement 5 */ 
-                          case 5: if((strcmp(qu, "YES") == 0) && 
-                                     (gr<3) && (ex<2)) s = 1; 
+                          case 5: if(strcmp(WL, "YES") == 0) s = 1;
                                   break; 
                                   /* if part of statement 6 */ 
-                          case 6: if((strcmp(qu, "YES") == 0) && 
-                                     (gr >=3.5)) s = 1; 
-
+                          case 6: if(strcmp(SB, "YES") == 0) s = 1; 
                                   break; 
-                                  /********* comment 1680 ******/ 
+                                  /* if part of statement 1 */ 
+                                  /****** comment 1500 ****/ 
+                          case 7: if(strcmp(SB, "NO") == 0) s = 1; 
+                                  break; 
+                                  /* if part of statement 2 */ 
+                                  /***** comment 1510 ******/ 
+                          case 8: if((strcmp(TI, "YES") == 0) && 
+                                     (strcmp(SB, "YES") == 0)) s = 1; 
+                                  break; 
+                                  /* if part of statement 3 */ 
+                          case 9: if(strcmp(TI, "NO") == 0) s =1; 
+                                  break; 
+                                  /* if part of statement 4 */ 
+                                  /******** comment 1560 ******/ 
+                          case 10: if((strcmp(NL, "YES") == 0) && 
+                                      (strcmp(TI, "YES") == 0)) s = 1; 
+                                  break; 
+                                  /******** comment 1570 ********/ 
+                                  /* if part of statement 5 */ 
+                          case 11: if((strcmp(TI, "YES") == 0) && 
+                                      (strcmp(SB, "YES") == 0)) s = 1;
+                                  break; 
+                                  /* if part of statement 6 */ 
+                          case 12: if(strcmp(TS, "NO") == 0) s = 1;
+                                  break;  
+                                  /****** comment 1500 ****/ 
+                          case 13: if(strcmp(TS, "YES") == 0) s = 1; 
+                                  break; 
+                                  /* if part of statement 2 */ 
+                                  /***** comment 1510 ******/ 
+                          case 14: if((strcmp(VO, "YES") == 0) &&
+                                      (strcmp(TS, "YES") == 0)) s =1; 
+                                  break; 
+                             
+                          case 15: if(strcmp(VO, "NO") == 0) s =1; 
+                                  break; 
+                                  /* if part of statement 4 */ 
+                                  /******** comment 1560 ******/ 
+                          case 16: if(strcmp(BL, "YES") == 0) s = 1; 
+                                  break; 
+                                  /******** comment 1570 ********/ 
+                                  /* if part of statement 5 */ 
+                          case 17: if((strcmp(BL, "YES") == 0) &&
+                                      (strcmp(FU, "YES") == 0)) s =1;
+                                  break; 
+                                  /* if part of statement 6 */ 
+                          case 18: if(strcmp(TS, "YES") == 0) s = 1;
+                                  break; 
+                                                      /* if part of statement 1 */ 
+                                  /****** comment 1500 ****/ 
+                          case 19: if(strcmp(LN, "YES") == 0) s = 1; 
+                                  break; 
+                                  /* if part of statement 2 */ 
+                                  /***** comment 1510 ******/ 
+                          case 20: if((strcmp(HO, "YES") == 0) && 
+                                      (strcmp(LN, "YES") == 0)) s =1;
+                                  break; 
+                                  /* if part of statement 3 */ 
+                          case 21: if(strcmp(VC, "YES") == 0) s =1; 
+                                  break; 
+                                  /* if part of statement 4 */ 
+                                  /******** comment 1560 ******/ 
+                          case 22: if((strcmp(NT, "YES") == 0) && 
+                                      (strcmp(VC, "YES") == 0)) s = 1; 
+                                  break; 
+                                  /******** comment 1570 ********/ 
+                                  /* if part of statement 5 */ 
+                          case 23: if(strcmp(FE, "YES") == 0) s = 1; 
+                                  break; 
+                                  /* if part of statement 6 */ 
+                          case 24: if(strcmp(PC, "YES") == 0) s = 1;
+                                  break; 
+                                                      /* if part of statement 1 */ 
+                                  /****** comment 1500 ****/ 
+                          case 25: if(strcmp(UR, "YES") == 0) s = 1; 
+                                  break; 
+                                  /* if part of statement 2 */ 
+                                  /***** comment 1510 ******/ 
+                          case 26: if(strcmp(UR, "NO") == 0) s = 1; 
+                                  break; 
+                                  /* if part of statement 3 */ 
+                          case 27: if((strcmp(BU, "YES") == 0) && 
+                                     (strcmp(UR, "YES") == 0)) s =1; 
+                                  break; 
+                                  /* if part of statement 4 */ 
+                                  /******** comment 1560 ******/ 
+                          case 28: if((strcmp(BS, "YES") == 0) && 
+                                      (strcmp(BU, "NO") == 0)) s = 1; 
+                                  break; 
+                                  /******** comment 1570 ********/ 
+                                  /* if part of statement 5 */ 
+                          case 29: if(strcmp(BS, "YES") == 0) s = 1; 
+                                  break; 
+                                  /* if part of statement 6 */ 
+                          case 30: if((strcmp(LA, "YES") == 0) && 
+                                      (strcmp(BS, "YES") == 0)) s = 1;
+                                  break;                       /* if part of statement 1 */ 
+                                  /****** comment 1500 ****/ 
+                          case 31: if(strcmp(BS, "YES") == 0) s = 1; 
+                                  break; 
+                                  /* if part of statement 2 */ 
+                                  /***** comment 1510 ******/ 
+                          case 32: if(strcmp(CU, "YES") == 0) s = 1; 
+                                  break; 
+                                  /* if part of statement 3 */ 
+                          case 33: if(strcmp(UB, "YES") == 0) s =1; 
+                                  break;
                           } 
                           /* see if the then part should be invoked */ 
                           if( s != 1) { 
@@ -242,7 +350,7 @@ b545: i= (statsk[sp] -1) *4 + clausk[sp];
                                   /* then part of statement 6 */ 
                           case 6: strcpy(po, "YES"); 
                                   printf("PO=PRODUCT ENGINEER\n"); 
-                                  break; 
+                                  break;  
                                   /****** comment 1680 ********/ 
                           } 
                           /* pop the stack */ 
