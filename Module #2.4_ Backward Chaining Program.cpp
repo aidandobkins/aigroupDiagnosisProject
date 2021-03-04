@@ -325,33 +325,148 @@ b545: i= (statsk[sp] -1) *4 + clausk[sp];
                           switch (sn) { 
                                   /* then part of statement 1 */ 
                                   /******* comment 1500 *******/ 
-                          case 1: strcpy(po, "NO"); 
-                                  printf("PO=NO\n"); 
+                          case 1: strcpy(PC, "NO"); 
+                                  cout << "PC=NO\n"; 
                                   break; 
                                   /* then part of statement 2 */ 
                                   /****** comment 1510 ******/ 
-                          case 2: strcpy(qu, "YES"); 
-                                  printf("QU=YES\n"); 
+                          case 2: strcpy(PC, "YES"); 
+                                  cout << "PC=YES\n"; 
                                   break; 
                                   /* then part of statement 3 */ 
-                          case 3: strcpy(po, "YES"); 
-                                  printf("PO=RESEARCH\n"); 
+                          case 3: strcpy(WL, "YES"); 
+                                  cout << "WL=YES\n"; 
                                   break; 
                                   /* then part of statement 4 */ 
                                   /******** comment 1560 ******/ 
-                          case 4: strcpy(po, "YES"); 
-                                  printf("PO=SERVICE ENGINEER\n"); 
+                          case 4: strcpy(HCL, "NO"); 
+                                  cout << "HCL=NO\n"; 
                                   break; 
                                   /* then part of statement 5 */ 
                                   /****** comment 1570 *****/ 
-                          case 5: strcpy(po, "NO"); 
-                                  printf("PO=NO"); 
+                          case 5: strcpy(SB, "YES"); 
+                                  cout << "SB=YES"; 
                                   break; 
                                   /* then part of statement 6 */ 
-                          case 6: strcpy(po, "YES"); 
-                                  printf("PO=PRODUCT ENGINEER\n"); 
+                          case 6: strcpy(TI, "YES"); 
+                                  cout << "TI=YES\n"; 
+                                  break;
+                                
+                          case 7: strcpy(HCL, "NO"); 
+                                  cout << "HCL=NO\n"; 
+                                  break; 
+                                  /* then part of statement 2 */ 
+                                  /****** comment 1510 ******/ 
+                          case 8: strcpy(NL, "YES"); 
+                                  cout << "NL=YES\n"; 
+                                  break; 
+                                  /* then part of statement 3 */ 
+                          case 9: strcpy(HCL, "NO"); 
+                                  cout << "HCL=NO\n"; 
+                                  break; 
+                                  /* then part of statement 4 */ 
+                                  /******** comment 1560 ******/ 
+                         case 10: strcpy(HCL, "YES"); 
+                                  cout << "HCL=YES\n"; 
+                                  break; 
+                                  /* then part of statement 5 */ 
+                                  /****** comment 1570 *****/ 
+                         case 11: strcpy(TS, "YES"); 
+                                  cout << "TS=YES"; 
+                                  break; 
+                                  /* then part of statement 6 */ 
+                         case 12: strcpy(TC, "NO"); 
+                                  cout << "TC=NO\n"; 
+                                  break;
+                                
+                         case 13: strcpy(VO, "YES"); 
+                                  cout << "VO=YES\n"; 
+                                  break; 
+                                  /* then part of statement 2 */ 
+                                  /****** comment 1510 ******/ 
+                         case 14: strcpy(BL, "YES"); 
+                                  cout << "BL=YES\n"; 
+                                  break; 
+                                  /* then part of statement 3 */ 
+                         case 15: strcpy(GC, "NO"); 
+                                  cout << "GC=NO\n"; 
+                                  break; 
+                                  /* then part of statement 4 */ 
+                                  /******** comment 1560 ******/ 
+                         case 16: strcpy(FU, "YES"); 
+                                  cout << "FU=YES\n"; 
+                                  break; 
+                                  /* then part of statement 5 */ 
+                                  /****** comment 1570 *****/ 
+                         case 17: strcpy(GC, "YES"); 
+                                  cout << "GC=YES"; 
+                                  break; 
+                                  /* then part of statement 6 */ 
+                         case 18: strcpy(LN, "YES"); 
+                                  cout << "LN=YES\n"; 
+                                  break;
+                         case 19: strcpy(HO, "YES"); 
+                                  cout << "HO=YES\n"; 
+                                  break;
+                                
+                         case 20: strcpy(VC, "YES"); 
+                                  cout << "VC=YES\n"; 
+                                  break; 
+                                  /* then part of statement 2 */ 
+                                  /****** comment 1510 ******/ 
+                         case 21: strcpy(NT, "YES"); 
+                                  cout << "NT=YES\n"; 
+                                  break; 
+                                  /* then part of statement 3 */ 
+                         case 22: strcpy(TC, "NO"); 
+                                  cout << "TC=NO\n"; 
+                                  break; 
+                                  /* then part of statement 4 */ 
+                                  /******** comment 1560 ******/ 
+                         case 23: strcpy(PC, "YES"); 
+                                  cout << "PC=YES\n"; 
+                                  break; 
+                                  /* then part of statement 5 */ 
+                                  /****** comment 1570 *****/ 
+                         case 24: strcpy(UR, "YES"); 
+                                  cout << "UR=YES"; 
+                                  break;
+                         case 25: strcpy(BU, "YES"); 
+                                  cout << "BU=YES\n"; 
+                                  break;
+                         case 26: strcpy(BC, "NO"); 
+                                  cout << "BC=NO\n"; 
+                                  break;
+                                
+                         case 27: strcpy(BS, "YES"); 
+                                  cout << "BS=YES\n"; 
+                                  break;
+                         case 28: strcpy(KC, "NO"); 
+                                  cout << "NT=NO\n"; 
+                                  break; 
+                                  /* then part of statement 3 */ 
+                         case 29: strcpy(LA, "YES"); 
+                                  cout << "LA=YES\n"; 
+                                  break; 
+                                  /* then part of statement 4 */ 
+                                  /******** comment 1560 ******/ 
+                         case 30: strcpy(KC, "YES"); 
+                                  cout << "KC=YES\n"; 
+                                  break; 
+                                  /* then part of statement 5 */ 
+                                  /****** comment 1570 *****/ 
+                         case 31: strcpy(CU, "YES"); 
+                                  cout << "CU=YES"; 
                                   break;  
-                                  /****** comment 1680 ********/ 
+                                  /******** comment 1560 ******/ 
+                         case 32: strcpy(UB, "YES"); 
+                                  cout << "UB=YES\n"; 
+                                  break; 
+                                  /* then part of statement 5 */ 
+                                  /****** comment 1570 *****/ 
+                         case 33: strcpy(BC, "YES"); 
+                                  cout << "BC=YES"; 
+                                  break;       
                           } 
                           /* pop the stack */ 
                           sp=sp+1; 
