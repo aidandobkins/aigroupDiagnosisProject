@@ -104,7 +104,7 @@ main()
         varlt[17] = "HO"; //hoarseness
         varlt[18] = "VC"; //voice change
         varlt[19] = "NT"; //pain to neck and throat
-        varlt[19] = "PC"; //possible cancer
+        varlt[20] = "PC"; //possible cancer
         for(i=1; i<11; i++) printf("VARIABLE %d %s\n", i, varlt[i]); 
         cout << "HIT RETURN KEY TO CONTINUE"; 
         cin >> buff;
