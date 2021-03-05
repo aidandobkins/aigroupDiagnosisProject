@@ -18,6 +18,8 @@ using namespace std;
    install your the clauses in sequence in the second 
    case statement of the main program 
    example strcpy(po,"YES"); 
+   */
+bool checker = false;
 /*  conclusion list */ 
 string conclt[10]; 
 /*  variable list */ 
@@ -39,6 +41,8 @@ int /* clause stack */ clausk[33], sn, f, i, j, s, k, /*stack pointer */ sp;
 void determine_member_concl_list(void); 
 void push_on_stack(void); 
 void instantiate(void); 
+void block1();
+void block2();
 
 main() 
 { 
@@ -164,23 +168,33 @@ main()
         /* get conclusion statement number (sn) from the conclusion list 
            (conclt) */ 
         /* first statement starts search */ 
-b520: 
+        block1();
+} 
+
+void block1()
+{ 
           f=1; 
           determine_member_concl_list(); 
           if (sn != 0){ 
-                  /* if sn = 0 then no conclusion of that name */ do 
+          block2();
+          } 
+}
+
+void block2()
+{
+        /* if sn = 0 then no conclusion of that name */ do 
                   /* push statement number (sn) and clause number=1 on 
                      goal 
                      stack which is composed of the statement stack 
                      (statsk) 
                      and clause stack (clausk) */ 
                   { 
-                          push_on_stack(); 
+                          if(checker == true) push_on_stack(); 
                           do 
                           { 
                            /* calculate clause location in clause-variable 
                               list */ 
-b545: i= (statsk[sp] -1) *4 + clausk[sp]; 
+          i= (statsk[sp] -1) *4 + clausk[sp]; 
           /* clause variable */ 
           //strcpy(varble, clvarlt[i]); 
           varble = clvarlt[i];
@@ -190,7 +204,8 @@ b545: i= (statsk[sp] -1) *4 + clausk[sp];
                   determine_member_concl_list(); 
                   if(sn != 0) 
                           /* it is a conclusion push it */ 
-                          goto b520; 
+                          checker = true;
+                          block1(); 
                   /* check instantiation of this clause */ 
                   instantiate(); 
                   clausk[sp] = clausk[sp] + 1; 
@@ -465,11 +480,11 @@ b545: i= (statsk[sp] -1) *4 + clausk[sp];
                                   /* stack is not empty */ 
                                   /* get next clause then continue */ 
                                   clausk[sp] = clausk[sp]+1; 
-                                  goto b545; 
+                                  checker = false;
+                                  block2(); 
                           } 
                   } 
-        } 
-} 
+}
 
 void determine_member_concl_list() { 
 /* routine to determine if a variable (varble) is a member of the 
