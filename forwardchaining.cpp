@@ -20,26 +20,25 @@ of the progrram within the second case statement. */
 using namespace std;
 
 int flag;
-string cndvar[10];
-string varlt[10], /* variable list*/ clvarlt[40]; /* clause var list */
+string cndvar[11];
+string varlt[11], /* variable list*/ clvarlt[41]; /* clause var list */
 string c, vp, /* condition variable */  v; /*variable */
-string fedint, interest, stock, dollar, fedmon;
-string po, /* position */  qu; /* qualify */
-int instlt[10];         /* instantiated list*/
+string CA, TR, CT, RT, SU, NE, CL, PE, SC, IT, RIT, TT;
+int instlt[11];         /* instantiated list*/
 int f, i, j, k, s, fp   /* front pointer */;
-int  bp  /* back pointer */,  gr /* grade */,  sn; /* statement number */
+int  bp  /* back pointer */, sn; /* statement number */
 int cn;  /* clause number */
 
 void search(void);
 void check_instantiation(void);
 void instantiate(void);
 
-main()
+int main()
 {
     /******** INITIALIZATION SECTION ***********/
     fp=1;
     bp=1;
-
+    
     for (i=1;i < 41; i++)
         clvarlt[i] = "";
     for (i=1;i < 11; i++)
@@ -71,12 +70,13 @@ main()
     varlt[8] = "PE";
     varlt[9] = "SC";
     varlt[10] = "IT";
-    varlt[11] = "RT";
+    varlt[11] = "RIT";
     varlt[12] = "TT";
 
     printf("*** VARIABLE LIST ***\n");
-    for (i=1;i < 12; i++)
-        printf("ENTER VARIABLE   %d   %s\n", i, varlt[i]);
+    for (i=1;i < 13; i++)
+        //printf("ENTER VARIABLE   %d   %s\n", i, varlt[i]);
+        cout << "ENTER VARIABLE " << i << ": " << varlt[i] << endl;
     printf("HIT RETURN TO CONTINUE");
     getchar();
 
@@ -93,11 +93,13 @@ main()
     printf("*** CLAUSE-VARIABLE LIST ***\n");
     for (i = 1; i < 9; i++)
     {
-        printf("** CLAUSE %d\n", i);
+        //printf("** CLAUSE %d\n", i);
+        cout << "** CLAUSE " << i << " **" << endl;
         for (j = 1; j < 5; j++)
         {
             k = 4 * (i - 1) + j;
-            printf("VARIABLE %d  %s\n", j, clvarlt[k]);
+            //printf("VARIABLE %d  %s\n", j, clvarlt[k]);
+            cout << "VARIABLE " << j << ": " << clvarlt[k] << endl;
         }
 
         if (i==4)
@@ -151,27 +153,48 @@ b496: search();
         {
             /* statement 1 */
             /***** comment 1500 *****/
-        case 1: if (interest == "FALL") s=1;
+        case 1: if (CA == "NO") s=1;
             break;
             /* statement 2 */
             /***** comment 1510 *****/
-        case 2: if (interest == "RISE") s=1;
+        case 2: if (CA == "YES") s=1;
             break;
             /* statement 3 */
             /***** comment 1540 *****/
-        case 3: if (dollar == "FALL") s=1;
+        case 3: if ((TR == "YES") && (CT == "YES")) s=1;
             break;
             /* statement 4 */
             /***** comment 1550 *****/
-        case 4: if (dollar == "RISE") s=1;
+        case 4: if ((SU == "YES") && (NE == "YES")) s=1;
             break;
             /* statement 5 */
-        case 5: if ((fedint == "FALL") &&
-                    (fedmon == "ADD")) s=1;
+        case 5: if (CT == "YES") s=1;
             break;
             /* statement 6 */
-        case 6: if ((qu == "YES") && (gr >= 3.5) == 0) s=1;
+        case 6: if (CL == "YES") s=1;
             break;
+            /* statement 7 */
+        case 7: if ((CL == "YES") && (PE == "YES")) s=1;
+            break;
+            /* statement 8 */
+        case 8: if (RT == "YES") s=1;
+            break;
+            /* statement 9 */
+        case 9: if (SC == "YES") s=1;
+            break;
+            /* statement 10 */
+        case 10: if (SC == "NO") s=1;
+            break;
+            /* statement 11 */
+        case 11: if ((IT == "YES") && (TT == "YES")) s=1;
+            break;
+            /* statement 12 */
+        case 12: if ((SC == "YES") && (IT == "YES")) s=1;
+            break;
+            /* statement 13 */
+        case 13: if ((SC == "YES") && (RIT == "YES")) s=1;
+            break;
+        
             /***** comment 1610 *****/
         }
 
@@ -188,47 +211,90 @@ b496: search();
             /*********** comment 1500 ***********/
             /* put variable on the conclusion variable queue */
         case 1:
-            stock = "RISE";
-            printf("ST=RISE\n");
-            v = "ST";
+            TR = "NO";
+            printf("TR = NO\n");
+            v = "TR";
             instantiate();
             break;
             /*********** comment 1510 ***********/
             /* put variable on the conclusion variable queue */
         case 2:
-            stock = "FALL";
-            printf("ST=FALL\n");
-            v = "ST";
+            TR = "YES";
+            printf("TR=YES\n");
+            v = "TR";
             instantiate();
             break;
             /*********** comment 1540 ***********/
             /* put variable on the conclusion variable queue */
         case 3:
-            interest = "RISE";
-            printf("IN=RISE\n");
-            v = "IN";
+            RT = "YES";
+            printf("RT=YES\n");
+            v = "RT";
             instantiate();
             break;
             /*********** comment 1550 ***********/
             /* put variable on the conclusion variable queue */
         case 4:
-            interest = "FALL";
-            printf("IN=FALL\n");
-            v = "IN";
+            TR = "KIDNEY CANCER";
+            printf("TR=KIDNEY CANCER\n");
+            v = "TR";
             instantiate();
             break;
             /* put variable on the conclusion variable queue */
         case 5:
-            interest = "FALL";
-            printf("IN=FALL\n");
-            v = "IN";
+            CL = "YES";
+            printf("CL=YES\n");
+            v = "CL";
             instantiate();
             break;
         case 6:
-            po = "YES";
-            printf("PO=YES\n");
+            PE = "YES";
+            printf("PE=YES\n");
+            v = "PE";
+            instantiate();
             break;
-            /*********** comment 1610 ***********/
+        case 7:
+            TR = "HAIRY CELL LEUKEMIA";
+            printf("TR=HAIRY CELL LEUKEMIA\n");
+            v = "TR";
+            instantiate();
+            break;
+        case 8:
+            SC = "YES";
+            printf("SC=YES\n");
+            v = "SC";
+            instantiate();
+            break;
+        case 9:
+            RIT = "YES";
+            printf("RIT=YES\n");
+            v = "RIT";
+            instantiate();
+            break;
+        case 10:
+            IT = "YES";
+            printf("IT=YES\n");
+            v = "IT";
+            instantiate();
+            break;
+        case 11:
+            TR = "BLADDER CANCER";
+            printf("TR=BLADDER CANCER\n");
+            v = "TR";
+            instantiate();
+            break;
+        case 12:
+            TR = "GASTRIC CANCER";
+            printf("TR=GASTRIC CANCER\n");
+            v = "TR";
+            instantiate();
+            break;
+        case 13:
+            TR = "THYROID CANCER";
+            printf("TR=THYROID CANCER\n");
+            v = "TR";
+            instantiate();
+            break;
         }
         f = sn + 1;
         goto b496;
@@ -274,24 +340,48 @@ void check_instantiation()
         {
             /* input statements for sample position knowledge base */
         case 1:
-            printf("RISE OR FALL FOR DO? ");
-            cin >> dollar;
+            printf("DOES THE PATIENT HAVE CANCER? ");
+            cin >> CA;
             break;
         case 2:
-            printf("RISE OR FALL FOR FT? ");
-            cin >> fedint;
+            printf("CAN THE PATIENT RECEIVE SURGERY? ");
+            cin >> SU;
             break;
         case 3:
-            printf("ADD OR SUBTRACT FOR FM? ");
-            cin >> fedmon;
+            printf("CAN THE PATIENT RECEIVE CHEMOTHERAPY? ");
+            cin >> CT;
             break;
         case 4:
-            printf("RISE OR FALL FOR IN? ");
-            cin >> interest;
+            printf("CAN THE PATIENT RECEIVE A NEPHRECTOMY? ");
+            cin >> NE;
             break;
         case 5:
-            printf("RISE OR FALL FOR ST? ");
-            cin >> stock;
+            printf("DOES THE PATIENT NEED CLADRIBINE? ");
+            cin >> CL;
+            break;
+        case 6:
+            printf("DOES THE PATIENT NEED PENTOSTATIN? ");
+            cin >> PE;
+            break;
+        case 7:
+            printf("CAN THE PATIENT RECEIVE RADIATION THERAPY? ");
+            cin >> RT;
+            break;
+        case 8:
+            printf("CAN THE PATIENT RECEIVE SUPPORTIVE CARE? ");
+            cin >> SC;
+            break;
+        case 9:
+            printf("CAN THE PATIENT RECEIVE IMMUNOTHERAPY ");
+            cin >> IT;
+            break;
+        case 10:
+            printf("CAN THE PATIENT RECEIVE TARGETED THERAPY? ");
+            cin >> TT;
+            break;
+        case 11:
+            printf("CAN THE PATIENT RECEIVE RADIOACTIVE IODINE TREATMENT? ");
+            cin >> RIT;
             break;
         }
     }
