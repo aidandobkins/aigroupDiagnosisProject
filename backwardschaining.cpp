@@ -21,7 +21,7 @@ using namespace std;
    */
 bool checker = false;
 /*  conclusion list */ 
-string conclt[10]; 
+string conclt[8]; 
 /*  variable list */ 
 string varlt[20]; 
 /*  clause vairable list */ 
@@ -29,14 +29,13 @@ string clvarlt[200];
 string varble; 
 string /* clauses */ FE, WL, UR, SB, BU, BS, TI, NL, TS, LA, 
        /* clauses */ CU, UB, VO, BL, FU, LN, HO, VC, NT; 
-string /* possible cancer */ PC = "YES", /* has cancer */ CA; 
-string buff; 
+string /* possible cancer */ PC = "YES", /* has cancer */ NC, KC, HCL, TC, BC, GC; 
 
 /* instantiated list */ 
 int instlt[33]; 
 /* statement stack */ 
 int statsk[33]; 
-int /* clause stack */ clausk[33], sn, f, i, j, s, k, /*stack pointer */ sp; 
+int /* clause stack */ clausk[33], sn = 0, f, i, j, s, k, /*stack pointer */ sp; 
 
 void determine_member_concl_list(void); 
 void push_on_stack(void); 
@@ -44,7 +43,7 @@ void instantiate(void);
 void block1();
 void block2();
 
-main() 
+int main() 
 { 
         /***** initialization section ******/ 
         /* stack space is 10 we initially place stack space at 10+1 */ 
@@ -59,27 +58,23 @@ main()
                 statsk[i]=0; 
                 clausk[i]=0; 
         } 
+        
         for (i=1; i<41; i++)  clvarlt[i] = ""; 
-        /* enter conclusions which are the variables in the then part, 
-        1 at 
-        a time.  enter the conclusions in exact order starting at the 1st 
-        if-then.  after last conclusion hit return key for rest of 
-        conclusions */ 
 
-        /*** comment 305 *****/ 
-        conclt[1] = "CA"; //no cancer 
+        conclt[1] = "NC"; //no cancer 
         conclt[2] = "PC"; //possible cancer
-        conclt[3] = "CA"; //kidney cancer 
-        conclt[4] = "CA"; //hairy cell leukemia
-        conclt[5] = "CA"; //thyroid cancer 
-        conclt[6] = "CA"; //bladder cancer 
-        conclt[7] = "CA"; //gastric cancer 
+        conclt[3] = "KC"; //kidney cancer 
+        conclt[4] = "HCL"; //hairy cell leukemia
+        conclt[5] = "TC"; //thyroid cancer 
+        conclt[6] = "BC"; //bladder cancer 
+        conclt[7] = "GC"; //gastric cancer 
         printf("*** CONCLUSION LIST ***\n"); 
-        for (i=1; i<11; i++) 
-           cout << "CONCLUSION %d %s\n", i, conclt[i]; 
+        for (i=1; i<8; i++) 
+           //printf("CONCLUSION %d %s\n", i, conclt[i]); 
+           cout << "CONCLUSION " << i << ": " << conclt[i] << endl;
 
         cout << "HIT RETURN TO CONTINUE"; 
-        
+        getchar();
         /* enter variables which are in the if part, 1 at a time in the 
         exact 
         order that they occur, up to 3 variables per if statement.  do not 
@@ -106,9 +101,10 @@ main()
         varlt[17] = "HO"; //hoarseness
         varlt[18] = "VC"; //voice change
         varlt[19] = "NT"; //pain to neck and throat
-        for(i=1; i<11; i++) printf("VARIABLE %d %s\n", i, varlt[i]); 
+        for(i=1; i<20; i++) //printf("VARIABLE %d %s\n", i, varlt[i]); 
+        cout << "VARIABLE " << i << ": " << varlt[i] << endl;
         cout << "HIT RETURN KEY TO CONTINUE"; 
-        cin >> buff;
+        getchar();
         /* enter variables as they appear in the if clauses.  a maximum 
         of 3 
         variables per if statement.  if no more variables hit return 
@@ -151,15 +147,16 @@ main()
          
         for(i=1; i<9; i++) 
         { 
-                cout << "** CLAUSE %d\n", i; 
+                cout << "** CLAUSE " << i << endl; 
                 for(j=1; j<5; j++) 
                 { k = 4 * (i-1) + j; 
-                  cout << "VARIABLE %d  %s\n", j, clvarlt[k]; 
+                  //cout << "VARIABLE %d  %s\n", j, clvarlt[k]; 
+                  cout << "VARIABLE " << j << ": " << clvarlt[k] << endl;
                 } 
                 if (i==4) 
                 { 
                    cout << "HIT RETURN KEY TO CONTINUE"; 
-                   cin >> buff; 
+                   getchar(); 
                 } 
         } 
         /****** inference section *****/ 
@@ -176,7 +173,7 @@ void block1()
           f=1; 
           determine_member_concl_list(); 
           if (sn != 0){ 
-          block2();
+                block2();
           } 
 }
 
@@ -371,7 +368,7 @@ void block2()
                           switch (sn) { 
                                   /* then part of statement 1 */ 
                                   /******* comment 1500 *******/ 
-                          case 1: CA = "NO"; 
+                          case 1: NC = "YES"; 
                                   cout << "NO CANCER\n"; 
                                   break; 
                           case 2: PC = "YES"; 
@@ -380,7 +377,7 @@ void block2()
                           case 3: WL = "YES"; 
                                   cout << "WL=YES\n"; 
                                   break; 
-                          case 4: CA = "NO";
+                          case 4: NC = "YES";
                                   cout << "NO CANCER\n"; 
                                   break; 
                           case 5: SB = "YES";
@@ -389,22 +386,22 @@ void block2()
                           case 6: TI = "YES"; 
                                   cout << "TI=YES\n"; 
                                   break;
-                          case 7: CA = "NO";
+                          case 7: NC = "YES";
                                   cout << "NO CANCER\n"; 
                                   break; 
                           case 8: NL = "YES"; 
                                   cout << "NL=YES\n"; 
                                   break; 
-                          case 9: CA = "NO"; 
+                          case 9: NC = "YES"; 
                                   cout << "NO CANCER\n"; 
                                   break; 
-                         case 10: CA = "YES";
+                         case 10: HCL = "YES";
                                   cout << "HAIRY CELL LEUKEMIA\n"; 
                                   break; 
                          case 11: TS = "YES";
                                   cout << "TS=YES"; 
                                   break; 
-                         case 12: CA = "NO";
+                         case 12: NC = "YES";
                                   cout << "NO CANCER\n"; 
                                   break;   
                          case 13: VO = "YES";
@@ -413,13 +410,13 @@ void block2()
                          case 14: BL = "YES";
                                   cout << "BL=YES\n"; 
                                   break; 
-                         case 15: CA = "NO";
+                         case 15: NC = "YES";
                                   cout << "NO CANCER\n"; 
                                   break; 
                          case 16: FU = "YES";
                                   cout << "FU=YES\n"; 
                                   break; 
-                         case 17: CA = "YES";
+                         case 17: GC = "YES";
                                   cout << "GASTRIC CANCER"; 
                                   break; 
                          case 18: LN = "YES";
@@ -434,7 +431,7 @@ void block2()
                          case 21: NT = "YES";
                                   cout << "NT=YES\n"; 
                                   break; 
-                         case 22: CA = "YES";
+                         case 22: TC = "YES";
                                   cout << "THYROID CANCER\n"; 
                                   break; 
                          case 23: PC = "YES"; 
@@ -446,19 +443,19 @@ void block2()
                          case 25: BU = "YES";
                                   cout << "BU=YES\n"; 
                                   break;
-                         case 26: CA = "NO";
+                         case 26: NC = "YES";
                                   cout << "NO CANCER\n"; 
                                   break; 
                          case 27: BS = "YES";
                                   cout << "BS=YES\n"; 
                                   break;
-                         case 28: CA = "NO";
+                         case 28: NC = "YES";
                                   cout << "NO CANCER\n"; 
                                   break; 
                          case 29: LA = "YES";
                                   cout << "LA=YES\n"; 
                                   break; 
-                         case 30: CA = "YES"; 
+                         case 30: KC = "YES"; 
                                   cout << "KIDNEY CANCER\n"; 
                                   break; 
                          case 31: CU = "YES";
@@ -467,7 +464,7 @@ void block2()
                          case 32: UB = "YES";
                                   cout << "UB=YES\n"; 
                                   break; 
-                         case 33: CA = "YES"; 
+                         case 33: BC = "YES"; 
                                   cout << "BLADDER CANCER\n"; 
                                   break;       
                           } 
@@ -481,6 +478,7 @@ void block2()
                                   /* get next clause then continue */ 
                                   clausk[sp] = clausk[sp]+1; 
                                   checker = false;
+                                  cout << "looping 2";
                                   block2(); 
                           } 
                   } 
@@ -491,14 +489,13 @@ void determine_member_concl_list() {
    conclusion list (conclt).  if yes return sn != 0. 
    if not a member sn=0; 
 */ 
-        /* initially set to not a member */ 
-        sn = 0; 
-        /* member of conclusion list to be searched is f */ 
-        i = f; 
-        while((varble != conclt[i]) && (i<8)) 
-                /* test for membership */ 
-                i=i+1; 
-        if (varble == conclt[i]) sn = i;  /* a member */ 
+        sn = 0;
+
+        for (int i = 1; i < 8; i++)
+        {
+            if(varble == conclt[i])
+                sn = i;
+        } 
 } 
 
 void push_on_stack() 
@@ -518,7 +515,7 @@ variable list (varlt) contains the variable (varble). */
 { 
         i=1; 
         /* find variable in the list */ 
-        while((varble != varlt[i]) && (i<10)) i=i+1; 
+        while((varble != varlt[i]) && (i<20)) i=i+1; 
         if((varble == varlt[i]) && (instlt[i] != 1)) 
                 /*found variable and not already instantiated */ 
         { 
