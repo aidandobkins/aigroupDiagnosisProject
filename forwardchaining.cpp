@@ -32,6 +32,7 @@ int cn;  /* clause number */
 void search(void);
 void check_instantiation(void);
 void instantiate(void);
+void b496();
 
 int main()
 {
@@ -84,12 +85,26 @@ int main()
     variables per IF statement. If no more variables left, just
     hit return key */
     /****** comment 407, 408 *************/
-    clvarlt[1] = "IN";
-    clvarlt[5] = "IN";
-    clvarlt[9] = "DO";
-    clvarlt[13] = "DO";
-    clvarlt[17] = "FT";
-    clvarlt[18] = "FM";
+    clvarlt[1] = "CA";
+    clvarlt[5] = "CA";
+    clvarlt[9] = "TR";
+    clvarlt[10] = "CT";
+    clvarlt[13] = "SU";
+    clvarlt[14] = "NE";
+    clvarlt[17] = "CT";
+    clvarlt[21] = "CL";
+    clvarlt[25] = "CL";
+    clvarlt[26] = "PE";
+    clvarlt[30] = "RT";
+    clvarlt[34] = "SC";
+    clvarlt[38] = "SC";
+    clvarlt[42] = "IT";
+    clvarlt[43] = "TT";
+    clvarlt[46] = "SC";
+    clvarlt[47] = "IT";
+    clvarlt[50] = "SC";
+    clvarlt[51] = "RIT";
+
     printf("*** CLAUSE-VARIABLE LIST ***\n");
     for (i = 1; i < 9; i++)
     {
@@ -124,7 +139,14 @@ int main()
     is located in the clause variable list (clvarlt) */
     /* start at the beginning */
     f=1;
-b496: search();
+
+    /* no more conclusion variables on queue */
+}
+
+
+void b496()
+{
+    search();
     /* point to first clause in statement */
     cn=1;
     if (sn != 0)
@@ -202,7 +224,7 @@ b496: search();
         if (s != 1)
         {
             f = sn + 1;
-            goto b496;
+            b496();
         }
 
         /* invoke THEN part */
@@ -297,7 +319,7 @@ b496: search();
             break;
         }
         f = sn + 1;
-        goto b496;
+        b496();
     }
 
     /* no more clauses in the clause variable list (clvarlt)
@@ -311,9 +333,8 @@ b496: search();
     {
         /* check out the condition variable */
         f = 1;
-        goto b496;
+        b496();
     }
-    /* no more conclusion variables on queue */
 }
 
 //==========================================================================
