@@ -145,20 +145,16 @@ int main()
         clvarlt[121] = "CU";
         clvarlt[125] = "UB";
          
-        for(i=1; i<9; i++) 
+        for(i=1; i<33; i++) 
         { 
                 cout << "** CLAUSE " << i << endl; 
-                for(j=1; j<5; j++) 
-                { k = 4 * (i-1) + j; 
+                  k = 4 * (i-1) + 1; 
                   //cout << "VARIABLE %d  %s\n", j, clvarlt[k]; 
-                  cout << "VARIABLE " << j << ": " << clvarlt[k] << endl;
-                } 
-                if (i==4) 
-                { 
-                   cout << "HIT RETURN KEY TO CONTINUE"; 
-                   getchar(); 
-                } 
+                  cout << "VARIABLE " << "1" << ": " << clvarlt[k] << endl;
+                 
         } 
+        cout << "HIT RETURN KEY TO CONTINUE"; 
+        getchar(); 
         /****** inference section *****/ 
         cout << "** ENTER CONCLUSION ? "; 
         cin >> varble; 
