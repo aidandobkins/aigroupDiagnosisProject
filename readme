@@ -1,1 +1,7 @@
+In order to properly run our programs, start with the Diagnosis program, and compile then run it, answering the questions that
+come up truthfully in order to get the correct result.
 
+After the diagnosis program has been run, compile and run the Treatment program and follow the same instructions as the previous program,
+answering truthfully and receiving the result of treatment options.
+
+Compile these programs in either vscode, codeblocks or xcode, using the latest version of g++ compiler.
