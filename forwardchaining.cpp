@@ -20,8 +20,8 @@ of the progrram within the second case statement. */
 using namespace std;
 
 int flag;
-string cndvar[11];
-string varlt[11], /* variable list*/ clvarlt[41]; /* clause var list */
+string cndvar[13];
+string varlt[13], /* variable list*/ clvarlt[52]; /* clause var list */
 string c, vp, /* condition variable */  v; /*variable */
 string CA, TR, CT, RT, SU, NE, CL, PE, SC, IT, RIT, TT;
 int instlt[11];         /* instantiated list*/
@@ -39,14 +39,14 @@ int main()
     /******** INITIALIZATION SECTION ***********/
     fp=1;
     bp=1;
-    
-    for (i=1;i < 41; i++)
+
+    for (i=1;i < 52; i++)
         clvarlt[i] = "";
-    for (i=1;i < 11; i++)
+    for (i=1;i < 13; i++)
         cndvar[i] = "";
     for (i=1;i < 11; i++)
         instlt[i] = 0;
-    for (i=1;i < 11; i++)
+    for (i=1;i < 13; i++)
         varlt[i] = "";
     for (i=1;i < 11; i++)
     {
@@ -106,7 +106,7 @@ int main()
     clvarlt[51] = "RIT";
 
     printf("*** CLAUSE-VARIABLE LIST ***\n");
-    for (i = 1; i < 9; i++)
+    for (i = 1; i < 13; i++)
     {
         //printf("** CLAUSE %d\n", i);
         cout << "** CLAUSE " << i << " **" << endl;
@@ -116,13 +116,9 @@ int main()
             //printf("VARIABLE %d  %s\n", j, clvarlt[k]);
             cout << "VARIABLE " << j << ": " << clvarlt[k] << endl;
         }
-
-        if (i==4)
-        {
-            printf("HIT RETURN TO CONTINUE");
-            getchar();
-        }
     }
+    printf("HIT RETURN TO CONTINUE");
+    getchar();
 
     /****** INFERENCE SECTION *****************/
     printf("ENTER CONDITION VARIABLE? ");
